@@ -10,6 +10,8 @@ import { TodoListPageComponent } from './page/todo-list-page/todo-list-page.comp
 import { NewTaskPageComponent } from './page/new-task-page/new-task-page.component';
 import { EditTaskPageComponent } from './page/edit-task-page/edit-task-page.component';
 import { RemoveTaskPageComponent } from './page/remove-task-page/remove-task-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AngularMaterialModule } from './angular-material/angular-material.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { RemoveTaskPageComponent } from './page/remove-task-page/remove-task-pag
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularMaterialModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
