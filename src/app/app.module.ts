@@ -3,38 +3,42 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RegistrationPageComponent } from './page/registration-page/registration-page.component';
-import { LoginPageComponent } from './page/login-page/login-page.component';
-import { HomePageComponent } from './page/home-page/home-page.component';
-import { TodoListPageComponent } from './page/todo-list-page/todo-list-page.component';
-import { NewTaskPageComponent } from './page/new-task-page/new-task-page.component';
-import { EditTaskPageComponent } from './page/edit-task-page/edit-task-page.component';
-import { RemoveTaskPageComponent } from './page/remove-task-page/remove-task-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AddTodoPage } from './pages/add-todo/add-todo.page';
+import { EditTodoPage } from './pages/edit-todo/edit-todo.page';
+import { HomePage } from './pages/home/home.page';
+import { LoginPage } from './pages/login/login.page';
+import { RemoveTodoPage } from './pages/remove-todo/remove-todo.page';
+import { SigninPage } from './pages/signin/signin.page';
+import { SignupPage } from './pages/signup/signup.page';
+import { TodoListPage } from './pages/todo-list/todo-list.page';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegistrationPageComponent,
-    LoginPageComponent,
-    HomePageComponent,
-    TodoListPageComponent,
-    NewTaskPageComponent,
-    EditTaskPageComponent,
-    RemoveTaskPageComponent
+    AddTodoPage,
+    EditTodoPage,
+    HomePage,
+    LoginPage,
+    RemoveTodoPage,
+    SigninPage,
+    SignupPage,
+    TodoListPage,
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     AngularMaterialModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

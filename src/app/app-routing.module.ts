@@ -1,22 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomePageComponent } from './page/home-page/home-page.component';
-import { LoginPageComponent } from './page/login-page/login-page.component';
-import { RegistrationPageComponent } from './page/registration-page/registration-page.component';
-import { TodoListPageComponent } from './page/todo-list-page/todo-list-page.component';
-import { NewTaskPageComponent } from './page/new-task-page/new-task-page.component';
-import { EditTaskPageComponent } from './page/edit-task-page/edit-task-page.component';
-import { RemoveTaskPageComponent } from './page/remove-task-page/remove-task-page.component';
+import { HomePage } from './pages/home/home.page';
+import { SigninPage } from './pages/signin/signin.page';
+import { TodoListPage } from './pages/todo-list/todo-list.page';
+import { SignupPage } from './pages/signup/signup.page';
+import { AddTodoPage } from './pages/add-todo/add-todo.page';
+import { EditTodoPage } from './pages/edit-todo/edit-todo.page';
+import { AuthGuard } from './guards/auth.guard';
+import { UnauthGuard } from './guards/unauth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomePageComponent },
-  { path: 'login', component: LoginPageComponent },
-  { path: 'register', component: RegistrationPageComponent },
-  { path: 'todo-list', component: TodoListPageComponent },
-  { path: 'new-task', component: NewTaskPageComponent },
-  { path: 'edit-task', component: EditTaskPageComponent },
-  { path: 'remove-task', component: RemoveTaskPageComponent },
+  { path: 'home', component: HomePage, canActivate: [AuthGuard] },
+  { path: 'signin', component: SigninPage, canActivate: [UnauthGuard] },
+  { path: 'signup', component: SignupPage },
+  { path: 'todo-list', component: TodoListPage, canActivate: [AuthGuard] },
+  { path: 'add-todo', component: AddTodoPage, canActivate: [AuthGuard] },
+  { path: 'edit-task', component: EditTodoPage, canActivate: [AuthGuard] },
+  { path: 'edit-task', component: EditTodoPage, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 
 @NgModule({
