@@ -1,0 +1,50 @@
+<mat-card class="p-5">
+  <mat-card-header class="m-auto pb-5">
+    <mat-card-title
+      >{{ this.actionPage | actionPageText}} Tarefa</mat-card-title
+    >
+  </mat-card-header>
+  <mat-card-content>
+    <form *ngIf="todoForm" [formGroup]="todoForm" class="w-100">
+      <mat-form-field class="w-100">
+        <mat-label>ID</mat-label>
+        <mat-icon matPrefix>key</mat-icon>
+        <input matInput name="id" formControlName="id" />
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Tarefa</mat-label>
+        <mat-icon matPrefix>format_list_bulleted</mat-icon>
+        <input matInput name="todo" formControlName="todo" />
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Data</mat-label>
+        <mat-icon matPrefix>calendar_today</mat-icon>
+        <input matInput name="date" formControlName="date" />
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Status</mat-label>
+        <mat-icon matPrefix>dns</mat-icon>
+        <mat-select formControlName="completed">
+          <mat-option [value]="true">Concluída</mat-option>
+          <mat-option [value]="false">Incompleta</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-card-actions align="end" class="p-0">
+        <button class="me-3" mat-raised-button (click)="cancel()">
+          Cancelar
+        </button>
+        <button
+          mat-raised-button
+          [color]="isPageRemoveTodo ? 'warn' : 'primary'"
+          (click)="buttonActionClick()"
+        >
+          {{ this.actionPage | actionPageText}}
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card-content>
+</mat-card>

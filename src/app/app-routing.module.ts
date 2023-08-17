@@ -4,11 +4,9 @@ import { HomePage } from './pages/home/home.page';
 import { SigninPage } from './pages/signin/signin.page';
 import { TodoListPage } from './pages/todo-list/todo-list.page';
 import { SignupPage } from './pages/signup/signup.page';
-import { AddTodoPage } from './pages/add-todo/add-todo.page';
-import { EditTodoPage } from './pages/edit-todo/edit-todo.page';
 import { AuthGuard } from './guards/auth.guard';
 import { UnauthGuard } from './guards/unauth.guard';
-import { RemoveTodoPage } from './pages/remove-todo/remove-todo.page';
+import { TodoPage } from './pages/todo/todo.page';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -16,9 +14,9 @@ const routes: Routes = [
   { path: 'signin', component: SigninPage, canActivate: [UnauthGuard] },
   { path: 'signup', component: SignupPage },
   { path: 'todo-list', component: TodoListPage, canActivate: [AuthGuard] },
-  { path: 'add-todo', component: AddTodoPage, canActivate: [AuthGuard] },
-  { path: 'edit-todo', component: EditTodoPage, canActivate: [AuthGuard] },
-  { path: 'remove-todo', component: RemoveTodoPage, canActivate: [AuthGuard] },
+  { path: 'add-todo', component: TodoPage, canActivate: [AuthGuard] },
+  { path: 'edit-todo', component: TodoPage, canActivate: [AuthGuard] },
+  { path: 'remove-todo', component: TodoPage, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 

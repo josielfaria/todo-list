@@ -2,7 +2,7 @@
   <button
     mat-raised-button
     class="mb-3 float-end"
-    (click)="addTodo()"
+    (click)="addTodo(ActionTodoPageEnum.NewTodoPage)"
     color="primary"
   >
     Adicionar
@@ -46,7 +46,7 @@
             class="icon cursor-pointer"
             color="primary"
             role="button"
-            (click)="navigateTo('edit', element.id)"
+            (click)="navigateTo(ActionTodoPageEnum.EditTodoPage, element.id)"
             >edit</mat-icon
           >
           <mat-icon
@@ -54,7 +54,7 @@
             class="icon cursor-pointer"
             color="warn"
             role="button"
-            (click)="navigateTo('remove', element.id)"
+            (click)="navigateTo(ActionTodoPageEnum.RemoveTodoPage, element.id)"
             >delete</mat-icon
           >
         </span>
