@@ -7,29 +7,27 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AddTodoPage } from './pages/add-todo/add-todo.page';
-import { EditTodoPage } from './pages/edit-todo/edit-todo.page';
 import { HomePage } from './pages/home/home.page';
 import { LoginPage } from './pages/login/login.page';
-import { RemoveTodoPage } from './pages/remove-todo/remove-todo.page';
 import { SigninPage } from './pages/signin/signin.page';
 import { SignupPage } from './pages/signup/signup.page';
 import { TodoListPage } from './pages/todo-list/todo-list.page';
 import { HttpClientModule } from '@angular/common/http';
 import { BooleanToStringPipe } from './pipes/boolean-to-string.pipe';
+import { TodoPage } from './pages/todo/todo.page';
+import { ActionPageTextPipe } from './pipes/action-page-text.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddTodoPage,
-    EditTodoPage,
     HomePage,
     LoginPage,
-    RemoveTodoPage,
     SigninPage,
     SignupPage,
     TodoListPage,
+    TodoPage,
     BooleanToStringPipe,
+    ActionPageTextPipe,
   ],
   imports: [
     HttpClientModule,

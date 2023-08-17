@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TodoModel } from 'src/app/models/todo.model';
 import { TodoService } from 'src/app/services/todo.service';
+import { ActionTodoPageEnum } from 'src/app/enums/action-todo-page';
 
 @Component({
   selector: 'app-todo-list',
@@ -12,6 +13,8 @@ export class TodoListPage implements OnInit {
   todoList = new Array<TodoModel>();
   displayedColumns: string[] = ['id', 'todo', 'date', 'completed', 'actions'];
 
+  ActionTodoPageEnum = ActionTodoPageEnum;
+
   constructor(private router: Router, private todoService: TodoService) {}
 
   ngOnInit(): void {
@@ -20,12 +23,12 @@ export class TodoListPage implements OnInit {
     });
   }
 
-  navigateTo(action: string, idTodo: string): void {
-    const url = action === 'edit' ? '/edit-todo' : '/remove-todo';
-    this.router.navigate([url], { queryParams: { idTodo } });
+  navigateTo(action: ActionTodoPageEnum, idTodo: string): void {
+    let url = action === ActionTodoPageEnum.EditTodoPage ? '/edit-todo' : '/remove-todo';
+    this.router.navigate([url], { queryParams: { idTodo, action } });
   }
 
-  addTodo(): void {
-    this.router.navigateByUrl('/add-todo');
+  addTodo(action: ActionTodoPageEnum): void {
+    this.router.navigate(['/add-todo'], { queryParams: { action } });
   }
 }

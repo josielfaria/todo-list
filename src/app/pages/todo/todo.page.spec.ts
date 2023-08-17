@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditTodoPage } from './edit-todo.page';
+import { TodoPage } from './todo.page';
 
-describe('EditTodoPage', () => {
-  let component: EditTodoPage;
-  let fixture: ComponentFixture<EditTodoPage>;
+describe('TodoPage', () => {
+  let component: TodoPage;
+  let fixture: ComponentFixture<TodoPage>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [EditTodoPage]
+      declarations: [TodoPage]
     });
-    fixture = TestBed.createComponent(EditTodoPage);
+    fixture = TestBed.createComponent(TodoPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
