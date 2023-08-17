@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomePageComponent } from './pages/home-page/home-page.component';
-import { SigninPageComponent } from './pages/signin-page/signin-page.component';
-import { TodoListPageComponent } from './pages/todo-list-page/todo-list-page.component';
-import { SignupPageComponent } from './pages/signup-page/signup-page.component';
-import { AddTodoPageComponent } from './pages/add-todo-page/add-todo-page.component';
-import { EditTodoPageComponent } from './pages/edit-todo-page/edit-todo-page.component';
+import { HomePage } from './pages/home/home.page';
+import { SigninPage } from './pages/signin/signin.page';
+import { TodoListPage } from './pages/todo-list/todo-list.page';
+import { SignupPage } from './pages/signup/signup.page';
+import { AddTodoPage } from './pages/add-todo/add-todo.page';
+import { EditTodoPage } from './pages/edit-todo/edit-todo.page';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomePageComponent },
-  { path: 'signin', component: SigninPageComponent },
-  { path: 'signup', component: SignupPageComponent },
-  { path: 'todo-list', component: TodoListPageComponent },
-  { path: 'add-todo', component: AddTodoPageComponent },
-  { path: 'edit-task', component: EditTodoPageComponent },
-  { path: 'edit-task', component: EditTodoPageComponent },
+  { path: 'home', component: HomePage },
+  { path: 'signin', component: SigninPage },
+  { path: 'signup', component: SignupPage },
+  { path: 'todo-list', component: TodoListPage },
+  { path: 'add-todo', component: AddTodoPage },
+  { path: 'edit-task', component: EditTodoPage },
+  { path: 'edit-task', component: EditTodoPage },
 ];
 
 @NgModule({
