@@ -6,16 +6,19 @@ import { TodoListPage } from './pages/todo-list/todo-list.page';
 import { SignupPage } from './pages/signup/signup.page';
 import { AddTodoPage } from './pages/add-todo/add-todo.page';
 import { EditTodoPage } from './pages/edit-todo/edit-todo.page';
+import { AuthGuard } from './guards/auth.guard';
+import { UnauthGuard } from './guards/unauth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomePage },
-  { path: 'signin', component: SigninPage },
+  { path: 'home', component: HomePage, canActivate: [AuthGuard] },
+  { path: 'signin', component: SigninPage, canActivate: [UnauthGuard] },
   { path: 'signup', component: SignupPage },
-  { path: 'todo-list', component: TodoListPage },
-  { path: 'add-todo', component: AddTodoPage },
-  { path: 'edit-task', component: EditTodoPage },
-  { path: 'edit-task', component: EditTodoPage },
+  { path: 'todo-list', component: TodoListPage, canActivate: [AuthGuard] },
+  { path: 'add-todo', component: AddTodoPage, canActivate: [AuthGuard] },
+  { path: 'edit-task', component: EditTodoPage, canActivate: [AuthGuard] },
+  { path: 'edit-task', component: EditTodoPage, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 
 @NgModule({
