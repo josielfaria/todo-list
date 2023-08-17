@@ -40,7 +40,7 @@
         <button
           mat-raised-button
           [color]="isPageRemoveTodo ? 'warn' : 'primary'"
-          (click)="save()"
+          (click)="buttonActionClick()"
         >
           {{ this.actionPage | actionPageText}}
         </button>

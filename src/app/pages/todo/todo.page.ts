@@ -11,13 +11,9 @@ import { TodoService } from 'src/app/services/todo.service';
   styleUrls: ['./todo.page.scss'],
 })
 export class TodoPage implements OnInit, AfterViewInit {
+  private readonly INDEX_ZERO = 0;
+
   todoForm: FormGroup | undefined;
-  // this.formBuilder.group({
-  //   id: [{ value: '', disabled: true }, [Validators.required]],
-  //   todo: ['', [Validators.required, Validators.minLength(4)]],
-  //   date: ['', [Validators.required]],
-  //   completed: [false, [Validators.required]],
-  // });
 
   actionPage = ActionTodoPageEnum.NewTodoPage;
 
@@ -42,37 +38,19 @@ export class TodoPage implements OnInit, AfterViewInit {
 
   getTodoDetail(id: string): void {
     this.todoService.getTodo(id).subscribe((todoDetail) => {
-      const todo = todoDetail[0];
-      this.todoForm &&
-        this.todoForm.patchValue({
-          id: todo.id,
-          todo: todo.todo,
-          date: todo.date,
-          completed: todo.completed,
-        });
+      this.setTodoFormValues(todoDetail[this.INDEX_ZERO]);
     });
   }
 
-  save(): void {
-    let newTodo = this.todoForm && (this.todoForm.getRawValue() as TodoModel);
-    if (newTodo) {
-      this.todoService.updateTodo(newTodo).subscribe((todoDetail) => {
-        const todo = todoDetail[0];
-        this.todoForm &&
-          this.todoForm.patchValue({
-            id: todo.id,
-            todo: todo.todo,
-            date: todo.date,
-            completed: todo.completed,
-          });
-      });
+  buttonActionClick(): void {
+    if (this.isPageEditTodo) {
+      this.updateTodo();
     }
   }
 
   cancel(): void {
     this.router.navigateByUrl('/todo-list');
   }
-
 
   get isPageNewTodo(): boolean {
     return this.actionPage === ActionTodoPageEnum.RemoveTodoPage;
@@ -84,6 +62,25 @@ export class TodoPage implements OnInit, AfterViewInit {
 
   get isPageEditTodo(): boolean {
     return this.actionPage === ActionTodoPageEnum.RemoveTodoPage;
+  }
+
+  private updateTodo(): void {
+    let newTodo = this.todoForm && (this.todoForm.getRawValue() as TodoModel);
+    if (newTodo) {
+      this.todoService.updateTodo(newTodo).subscribe((todoDetail) => {
+        this.setTodoFormValues(todoDetail[this.INDEX_ZERO]);
+      });
+    }
+  }
+
+  private setTodoFormValues(todo: TodoModel): void {
+    this.todoForm &&
+      this.todoForm.patchValue({
+        id: todo.id,
+        todo: todo.todo,
+        date: todo.date,
+        completed: todo.completed,
+      });
   }
 
   private setTodoFormGroupConfig(): void {
