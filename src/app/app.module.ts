@@ -12,6 +12,8 @@ import { EditTaskPageComponent } from './page/edit-task-page/edit-task-page.comp
 import { RemoveTaskPageComponent } from './page/remove-task-page/remove-task-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -26,9 +28,11 @@ import { AngularMaterialModule } from './angular-material/angular-material.modul
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     AngularMaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
