@@ -16,8 +16,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupPage },
   { path: 'todo-list', component: TodoListPage, canActivate: [AuthGuard] },
   { path: 'add-todo', component: AddTodoPage, canActivate: [AuthGuard] },
-  { path: 'edit-task', component: EditTodoPage, canActivate: [AuthGuard] },
-  { path: 'edit-task', component: EditTodoPage, canActivate: [AuthGuard] },
+  { path: 'edit-todo', component: EditTodoPage, canActivate: [AuthGuard] },
+  { path: 'edit-todo', component: EditTodoPage, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 
