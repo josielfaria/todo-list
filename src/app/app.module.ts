@@ -16,6 +16,7 @@ import { SigninPage } from './pages/signin/signin.page';
 import { SignupPage } from './pages/signup/signup.page';
 import { TodoListPage } from './pages/todo-list/todo-list.page';
 import { HttpClientModule } from '@angular/common/http';
+import { BooleanToStringPipe } from './pipes/boolean-to-string.pipe';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
     SigninPage,
     SignupPage,
     TodoListPage,
+    BooleanToStringPipe,
   ],
   imports: [
     HttpClientModule,
