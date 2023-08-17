@@ -8,6 +8,7 @@ import { AddTodoPage } from './pages/add-todo/add-todo.page';
 import { EditTodoPage } from './pages/edit-todo/edit-todo.page';
 import { AuthGuard } from './guards/auth.guard';
 import { UnauthGuard } from './guards/unauth.guard';
+import { RemoveTodoPage } from './pages/remove-todo/remove-todo.page';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: 'todo-list', component: TodoListPage, canActivate: [AuthGuard] },
   { path: 'add-todo', component: AddTodoPage, canActivate: [AuthGuard] },
   { path: 'edit-todo', component: EditTodoPage, canActivate: [AuthGuard] },
-  { path: 'edit-todo', component: EditTodoPage, canActivate: [AuthGuard] },
+  { path: 'remove-todo', component: RemoveTodoPage, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 
