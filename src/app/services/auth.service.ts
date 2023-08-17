@@ -3,7 +3,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserModel } from '../models/user.model';
-import { Router } from '@angular/router';
 import { SessionStorageEnum } from '../enums/session-storage';
 
 @Injectable({ providedIn: 'root' })
@@ -13,7 +12,7 @@ export class AuthService {
   private loggedInSubject = new BehaviorSubject<boolean>(false);
   loggedIn$ = this.loggedInSubject.asObservable();
 
-  constructor(private httpClient: HttpClient, private route: Router) {}
+  constructor(private httpClient: HttpClient) {}
 
   login(username: string, password: string): Observable<any> {
     const params = new HttpParams()
