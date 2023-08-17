@@ -3,13 +3,13 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserModel } from '../models/user.model';
-import { AuthGuard } from '../guards/auth.guard';
 import { Router } from '@angular/router';
 import { SessionStorageEnum } from '../enums/session-storage';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly URL_API = 'https://64dd7598825d19d9bfb12c6d.mockapi.io/api';
+
   private loggedInSubject = new BehaviorSubject<boolean>(false);
   loggedIn$ = this.loggedInSubject.asObservable();
 
@@ -40,7 +40,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return sessionStorage.getItem(SessionStorageEnum.LoggedIn) === "true";
+    return sessionStorage.getItem(SessionStorageEnum.LoggedIn) === 'true';
   }
 
   private setLoggedInSession(value: boolean): void {
