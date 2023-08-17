@@ -43,7 +43,9 @@ export class TodoPage implements OnInit, AfterViewInit {
   }
 
   buttonActionClick(): void {
-    if (this.isPageEditTodo) {
+    if (this.isPageNewTodo) {
+      this.addTodo();
+    } else if (this.isPageEditTodo) {
       this.updateTodo();
     } else if (this.isPageRemoveTodo) {
       this.removeTodo();
@@ -66,13 +68,18 @@ export class TodoPage implements OnInit, AfterViewInit {
     return this.actionPage === ActionTodoPageEnum.RemoveTodoPage;
   }
 
-  private removeTodo(): void {
+  private addTodo(): void {
     let newTodo = this.todoForm && (this.todoForm.getRawValue() as TodoModel);
-    if (newTodo && newTodo.id) {
-      this.todoService.removeTodo(newTodo.id).subscribe((todoDetail) => {
-        // TODO: trazer success boolean e loading
-        if (todoDetail) {
-          this.router.navigateByUrl('/todo-list')
+    if (newTodo) {
+      this.todoService.addTodo(newTodo).subscribe((todoDetail) => {
+        if (todoDetail && todoDetail.id) {
+          this.setTodoFormValues(todoDetail);
+          this.router.navigate(['/edit-todo'], {
+            queryParams: {
+              idTodo: todoDetail.id,
+              action: ActionTodoPageEnum.EditTodoPage,
+            },
+          });
         }
       });
     }
@@ -83,6 +90,18 @@ export class TodoPage implements OnInit, AfterViewInit {
     if (newTodo) {
       this.todoService.updateTodo(newTodo).subscribe((todoDetail) => {
         this.setTodoFormValues(todoDetail[this.INDEX_ZERO]);
+      });
+    }
+  }
+
+  private removeTodo(): void {
+    let newTodo = this.todoForm && (this.todoForm.getRawValue() as TodoModel);
+    if (newTodo && newTodo.id) {
+      this.todoService.removeTodo(newTodo.id).subscribe((todoDetail) => {
+        // TODO: trazer success boolean e loading
+        if (todoDetail) {
+          this.router.navigateByUrl('/todo-list');
+        }
       });
     }
   }
