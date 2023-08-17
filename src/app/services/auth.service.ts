@@ -40,6 +40,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
+    // Se converter para Boolean terá o retorno sempre true para quando houver LoggedIn na Session Storage. 
     return sessionStorage.getItem(SessionStorageEnum.LoggedIn) === 'true';
   }
 
