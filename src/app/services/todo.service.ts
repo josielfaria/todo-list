@@ -7,14 +7,15 @@ import { TodoModel } from '../models/todo.model';
   providedIn: 'root',
 })
 export class TodoService {
-  private readonly URL_API = 'https://64dd7598825d19d9bfb12c6d.mockapi.io/api';
+  private readonly URL_API =
+    'https://64dd7598825d19d9bfb12c6d.mockapi.io/api/todo-list/';
 
   constructor(private httpClient: HttpClient) {}
 
   getAllTodos(): Observable<Array<TodoModel>> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.httpClient
-      .get<Array<TodoModel>>(this.URL_API + '/todo-list', { headers })
+      .get<Array<TodoModel>>(this.URL_API, { headers })
       .pipe(
         tap((response: Array<TodoModel>) => {
           // TODO: rever esse retorno
@@ -31,7 +32,7 @@ export class TodoService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.httpClient
-      .get<Array<TodoModel>>(this.URL_API + '/todo-list', { params, headers })
+      .get<Array<TodoModel>>(this.URL_API, { params, headers })
       .pipe(
         tap((response: Array<TodoModel>) => {
           console.log('response', response);
@@ -52,6 +53,24 @@ export class TodoService {
         newTodo,
         { headers }
       )
+      .pipe(
+        tap((response: Array<TodoModel>) => {
+          console.log('response update', response);
+          // TODO: rever esse retorno
+          if (response && response.length > 0) {
+          } else {
+          }
+        })
+      );
+  }
+
+  removeTodo(id: string): Observable<Array<TodoModel>> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.httpClient
+      .delete<Array<TodoModel>>(this.URL_API + id, {
+        headers,
+      })
       .pipe(
         tap((response: Array<TodoModel>) => {
           console.log('response update', response);
