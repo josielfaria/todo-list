@@ -45,6 +45,8 @@ export class TodoPage implements OnInit, AfterViewInit {
   buttonActionClick(): void {
     if (this.isPageEditTodo) {
       this.updateTodo();
+    } else if (this.isPageRemoveTodo) {
+      this.removeTodo();
     }
   }
 
@@ -53,15 +55,27 @@ export class TodoPage implements OnInit, AfterViewInit {
   }
 
   get isPageNewTodo(): boolean {
-    return this.actionPage === ActionTodoPageEnum.RemoveTodoPage;
+    return this.actionPage === ActionTodoPageEnum.NewTodoPage;
+  }
+
+  get isPageEditTodo(): boolean {
+    return this.actionPage === ActionTodoPageEnum.EditTodoPage;
   }
 
   get isPageRemoveTodo(): boolean {
     return this.actionPage === ActionTodoPageEnum.RemoveTodoPage;
   }
 
-  get isPageEditTodo(): boolean {
-    return this.actionPage === ActionTodoPageEnum.RemoveTodoPage;
+  private removeTodo(): void {
+    let newTodo = this.todoForm && (this.todoForm.getRawValue() as TodoModel);
+    if (newTodo && newTodo.id) {
+      this.todoService.removeTodo(newTodo.id).subscribe((todoDetail) => {
+        // TODO: trazer success boolean e loading
+        if (todoDetail) {
+          this.router.navigateByUrl('/todo-list')
+        }
+      });
+    }
   }
 
   private updateTodo(): void {
