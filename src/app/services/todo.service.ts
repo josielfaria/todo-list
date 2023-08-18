@@ -27,6 +27,10 @@ export class TodoService {
     },
   ]);
 
+  getTodoListCount(): number {
+    return this.todoList.getValue().length;
+  }
+
   getTodoList(): Observable<TodoModel[]> {
     return this.todoList.asObservable();
   }
