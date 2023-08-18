@@ -30,6 +30,12 @@ export class AuthService {
     return of(!!user);
   }
 
+  register(newUser: UserModel): Observable<boolean> {
+    newUser.id = this.gerarId();
+    this.userService.addUser(newUser);
+    return of(true);
+  }
+
   logout(): void {
     this.loggedInSubject.next(false);
     this.setLoggedInSession(false);
@@ -40,7 +46,17 @@ export class AuthService {
     return sessionStorage.getItem(SessionStorageEnum.LoggedIn) === 'true';
   }
 
+  checkUsernameExists(username: string): Observable<boolean> {
+    const userExists = this.userList.find((user) => user.username === username);
+    return of(!!userExists);
+  }
+
   private setLoggedInSession(value: boolean): void {
     sessionStorage.setItem(SessionStorageEnum.LoggedIn, String(value));
+  }
+
+  private gerarId(): string {
+    const newId = Math.max(...this.userList.map((obj) => Number(obj.id) + 1));
+    return String(newId);
   }
 }
