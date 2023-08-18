@@ -41,6 +41,7 @@
           mat-raised-button
           [color]="isPageRemoveTodo ? 'warn' : 'primary'"
           (click)="buttonActionClick()"
+          [disabled]="todoForm.invalid"
         >
           {{ this.actionPage | actionPageText}}
         </button>
