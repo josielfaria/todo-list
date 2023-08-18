@@ -1,1 +1,86 @@
-<p>signup works!</p>
+<div class="h-100 d-flex">
+  <mat-card class="m-auto p-5">
+    <img
+      mat-card-image
+      class="login-brand m-auto p-5"
+      src="../../../assets/images/login.svg"
+      alt="Login Brand"
+    />
+
+    <mat-card-content>
+      <form
+        *ngIf="registrationForm"
+        [formGroup]="registrationForm"
+        (ngSubmit)="registration()"
+        class="row"
+      >
+        <mat-form-field class="row p-0 mb-1">
+          <mat-label>Usuário</mat-label>
+          <mat-icon matPrefix>person</mat-icon>
+          <input
+            matInput
+            name="username"
+            formControlName="username"
+            placeholder="Digite o usuário"
+          />
+          <mat-error
+            *ngIf="registrationForm?.hasError('usernameExists', 'username')"
+          >
+            Usuário já existe.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="row p-0 mb-1">
+          <mat-label>Nome</mat-label>
+          <mat-icon matPrefix>person</mat-icon>
+          <input
+            matInput
+            name="name"
+            formControlName="name"
+            placeholder="Digite o usuário"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="row p-0 mb-1">
+          <mat-label>Senha</mat-label>
+          <input
+            matInput
+            type="password"
+            name="password"
+            formControlName="password"
+            placeholder="Digite a senha"
+          />
+          <mat-icon matPrefix>lock</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="row p-0 mb-1">
+          <mat-label>Confirmar Senha</mat-label>
+          <input
+            matInput
+            type="confirmPassword"
+            name="confirmPassword"
+            formControlName="confirmPassword"
+            placeholder="Digite a senha"
+            required
+          />
+          <mat-icon matPrefix>lock</mat-icon>
+          <mat-error
+            *ngIf="registrationForm?.hasError('passwordsDoNotMatch', 'confirmPassword')"
+          >
+            As senhas não coincidem.
+          </mat-error>
+        </mat-form-field>
+
+        <button
+          class="row mb-3"
+          mat-raised-button
+          color="primary"
+          [disabled]="registrationForm.invalid"
+        >
+          Salvar
+        </button>
+        <button class="row" mat-raised-button color="accent">Voltar</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -8,8 +8,8 @@
     />
 
     <mat-card-content>
-      <form [formGroup]="loginForm" class="row" (ngSubmit)="login()">
-        <mat-form-field class="row p-0">
+      <form [formGroup]="loginForm" class="w-100" (ngSubmit)="login()">
+        <mat-form-field class="w-100 p-0">
           <mat-label>Username</mat-label>
           <mat-icon matPrefix>person</mat-icon>
           <input
@@ -20,7 +20,7 @@
           />
         </mat-form-field>
 
-        <mat-form-field class="row p-0">
+        <mat-form-field class="w-100 p-0">
           <mat-label>Password</mat-label>
           <input
             matInput
@@ -31,7 +31,19 @@
           />
           <mat-icon matPrefix>lock</mat-icon>
         </mat-form-field>
-        <button class="row" mat-raised-button color="primary">Entrar</button>
+
+        <button class="w-100 mb-3" mat-raised-button color="primary">
+          Entrar
+        </button>
+
+        <button
+          class="w-100"
+          mat-button
+          color="accent"
+          (click)="navigateToSignup()"
+        >
+          Registrar
+        </button>
       </form>
     </mat-card-content>
   </mat-card>

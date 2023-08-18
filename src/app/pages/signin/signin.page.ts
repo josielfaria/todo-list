@@ -41,4 +41,8 @@ export class SigninPage {
       console.log('Login failed', error);
     }
   }
+
+  navigateToSignup(): void {
+    this.router.navigateByUrl('signup');
+  }
 }
