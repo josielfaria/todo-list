@@ -50,6 +50,10 @@ export class SignupPage implements OnInit {
     }
   }
 
+  navigateToSignin(): void {
+    this.router.navigateByUrl('signin');
+  }
+
   private setRegistrationFormGroupConfig(): void {
     this.registrationForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
