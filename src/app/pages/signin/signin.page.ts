@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RoutesEnum } from 'src/app/enums/routes';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { UnauthGuard } from 'src/app/guards/unauth.guard';
 import { AuthService } from 'src/app/services/auth.service';
@@ -33,7 +34,7 @@ export class SigninPage {
         .login(username, password)
         .subscribe((loggedIn: boolean) => {
           if (loggedIn) {
-            this.router.navigateByUrl('home');
+            this.router.navigateByUrl(RoutesEnum.Home);
           }
         });
     } catch (error) {
@@ -43,6 +44,6 @@ export class SigninPage {
   }
 
   navigateToSignup(): void {
-    this.router.navigateByUrl('signup');
+    this.router.navigateByUrl(RoutesEnum.Signup);
   }
 }

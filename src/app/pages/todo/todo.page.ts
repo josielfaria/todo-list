@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ActionTodoPageEnum } from 'src/app/enums/action-todo-page';
+import { RoutesEnum } from 'src/app/enums/routes';
 import { TodoModel } from 'src/app/models/todo.model';
 import { TodoService } from 'src/app/services/todo.service';
 
@@ -53,7 +54,7 @@ export class TodoPage implements OnInit {
   }
 
   cancel(): void {
-    this.router.navigateByUrl('/todo-list');
+    this.router.navigateByUrl(RoutesEnum.TodoList);
   }
 
   get isPageNewTodo(): boolean {
@@ -74,7 +75,7 @@ export class TodoPage implements OnInit {
       this.todoService.addTodo(newTodo).subscribe((todoDetail) => {
         if (todoDetail) {
           this.setTodoFormValues(todoDetail);
-          this.router.navigate(['/edit-todo'], {
+          this.router.navigate([RoutesEnum.EditTodo], {
             queryParams: {
               idTodo: todoDetail.id,
               action: ActionTodoPageEnum.EditTodoPage,
@@ -99,7 +100,7 @@ export class TodoPage implements OnInit {
     if (newTodo && newTodo.id) {
       this.todoService.deleteTodo(newTodo.id).subscribe((deleted) => {
         if (deleted) {
-          this.router.navigateByUrl('/todo-list');
+          this.router.navigateByUrl(RoutesEnum.TodoList);
         }
       });
     }

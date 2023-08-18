@@ -7,17 +7,18 @@ import { SignupPage } from './pages/signup/signup.page';
 import { AuthGuard } from './guards/auth.guard';
 import { UnauthGuard } from './guards/unauth.guard';
 import { TodoPage } from './pages/todo/todo.page';
+import { RoutesEnum } from './enums/routes';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomePage, canActivate: [AuthGuard] },
-  { path: 'signin', component: SigninPage, canActivate: [UnauthGuard] },
-  { path: 'signup', component: SignupPage, canActivate: [UnauthGuard] },
-  { path: 'todo-list', component: TodoListPage, canActivate: [AuthGuard] },
-  { path: 'add-todo', component: TodoPage, canActivate: [AuthGuard] },
-  { path: 'edit-todo', component: TodoPage, canActivate: [AuthGuard] },
-  { path: 'remove-todo', component: TodoPage, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: RoutesEnum.Home, pathMatch: 'full' },
+  { path: RoutesEnum.Home, component: HomePage, canActivate: [AuthGuard] },
+  { path: RoutesEnum.Signin, component: SigninPage, canActivate: [UnauthGuard] },
+  { path: RoutesEnum.Signup, component: SignupPage, canActivate: [UnauthGuard] },
+  { path: RoutesEnum.TodoList, component: TodoListPage, canActivate: [AuthGuard] },
+  { path: RoutesEnum.AddTodo, component: TodoPage, canActivate: [AuthGuard] },
+  { path: RoutesEnum.EditTodo, component: TodoPage, canActivate: [AuthGuard] },
+  { path: RoutesEnum.RemoveTodo, component: TodoPage, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: RoutesEnum.Home, pathMatch: 'full' },
 ];
 
 @NgModule({

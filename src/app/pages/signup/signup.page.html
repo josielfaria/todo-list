@@ -12,9 +12,9 @@
         *ngIf="registrationForm"
         [formGroup]="registrationForm"
         (ngSubmit)="registration()"
-        class="row"
+        class="w-100"
       >
-        <mat-form-field class="row p-0 mb-1">
+        <mat-form-field class="w-100 p-0 mb-1">
           <mat-label>Usuário</mat-label>
           <mat-icon matPrefix>person</mat-icon>
           <input
@@ -30,7 +30,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="row p-0 mb-1">
+        <mat-form-field class="w-100 p-0 mb-1">
           <mat-label>Nome</mat-label>
           <mat-icon matPrefix>person</mat-icon>
           <input
@@ -41,7 +41,7 @@
           />
         </mat-form-field>
 
-        <mat-form-field class="row p-0 mb-1">
+        <mat-form-field class="w-100 p-0 mb-1">
           <mat-label>Senha</mat-label>
           <input
             matInput
@@ -53,7 +53,7 @@
           <mat-icon matPrefix>lock</mat-icon>
         </mat-form-field>
 
-        <mat-form-field class="row p-0 mb-1">
+        <mat-form-field class="w-100 p-0 mb-1">
           <mat-label>Confirmar Senha</mat-label>
           <input
             matInput
@@ -72,14 +72,22 @@
         </mat-form-field>
 
         <button
-          class="row mb-3"
+          class="w-100 mb-3"
           mat-raised-button
           color="primary"
           [disabled]="registrationForm.invalid"
         >
           Salvar
         </button>
-        <button class="row" mat-raised-button color="accent">Voltar</button>
+
+        <button
+          class="w-100"
+          mat-raised-button
+          color="accent"
+          (click)="navigateToSignin()"
+        >
+          Voltar
+        </button>
       </form>
     </mat-card-content>
   </mat-card>

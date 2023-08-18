@@ -1,5 +1,29 @@
-<div class="mt-5 pt-5">
-  <div class="container">
-    <router-outlet></router-outlet>
-  </div>
-</div>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav mode="side" opened="true" *ngIf="isLoggedIn">
+    <mat-nav-list>
+      <mat-list-item>
+        <mat-icon matListItemIcon>home</mat-icon>
+        <div matListItemTitle routerLink="/home">Início</div>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon matListItemIcon>format_list_bulleted</mat-icon>
+        <div matListItemTitle routerLink="/todo-list">Tarefas</div>
+      </mat-list-item>
+    </mat-nav-list>
+
+    <button
+      class="w-50 position-absolute bottom-0 start-0 end-0 m-auto mb-5"
+      mat-button
+      color="warn"
+      (click)="logout()"
+    >
+      <span>Sair</span>
+      <mat-icon iconPositionEnd>exit_to_app</mat-icon>
+    </button>
+  </mat-sidenav>
+  <mat-sidenav-content class="w-100">
+    <div class="container mt-5 p-5">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

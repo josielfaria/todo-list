@@ -27,6 +27,10 @@ export class UserService {
     },
   ]);
 
+  getUserListCount(): number {
+    return this.userList.getValue().length;
+  }
+
   getUserList(): Observable<UserModel[]> {
     return this.userList.asObservable();
   }
