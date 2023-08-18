@@ -10,7 +10,7 @@ import { TodoService } from 'src/app/services/todo.service';
   templateUrl: './todo.page.html',
   styleUrls: ['./todo.page.scss'],
 })
-export class TodoPage implements OnInit, AfterViewInit {
+export class TodoPage implements OnInit {
   private readonly INDEX_ZERO = 0;
 
   todoForm: FormGroup | undefined;
@@ -34,11 +34,11 @@ export class TodoPage implements OnInit, AfterViewInit {
     }
   }
 
-  ngAfterViewInit(): void {}
-
   getTodoDetail(id: string): void {
-    this.todoService.getTodo(id).subscribe((todoDetail) => {
-      this.setTodoFormValues(todoDetail[this.INDEX_ZERO]);
+    this.todoService.getTodoById(id).subscribe((todoDetail) => {
+      if (todoDetail) {
+        this.setTodoFormValues(todoDetail);
+      }
     });
   }
 
@@ -72,7 +72,7 @@ export class TodoPage implements OnInit, AfterViewInit {
     let newTodo = this.todoForm && (this.todoForm.getRawValue() as TodoModel);
     if (newTodo) {
       this.todoService.addTodo(newTodo).subscribe((todoDetail) => {
-        if (todoDetail && todoDetail.id) {
+        if (todoDetail) {
           this.setTodoFormValues(todoDetail);
           this.router.navigate(['/edit-todo'], {
             queryParams: {
@@ -86,10 +86,10 @@ export class TodoPage implements OnInit, AfterViewInit {
   }
 
   private updateTodo(): void {
-    let newTodo = this.todoForm && (this.todoForm.getRawValue() as TodoModel);
-    if (newTodo) {
-      this.todoService.updateTodo(newTodo).subscribe((todoDetail) => {
-        this.setTodoFormValues(todoDetail[this.INDEX_ZERO]);
+    let todo = this.todoForm && (this.todoForm.getRawValue() as TodoModel);
+    if (todo && todo.id) {
+      this.todoService.updateTodo(todo.id, todo).subscribe((updateTodo) => {
+        this.setTodoFormValues(updateTodo);
       });
     }
   }
@@ -97,9 +97,8 @@ export class TodoPage implements OnInit, AfterViewInit {
   private removeTodo(): void {
     let newTodo = this.todoForm && (this.todoForm.getRawValue() as TodoModel);
     if (newTodo && newTodo.id) {
-      this.todoService.removeTodo(newTodo.id).subscribe((todoDetail) => {
-        // TODO: trazer success boolean e loading
-        if (todoDetail) {
+      this.todoService.deleteTodo(newTodo.id).subscribe((deleted) => {
+        if (deleted) {
           this.router.navigateByUrl('/todo-list');
         }
       });

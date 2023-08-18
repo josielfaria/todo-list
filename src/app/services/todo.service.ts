@@ -1,91 +1,68 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { TodoModel } from '../models/todo.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TodoService {
-  private readonly URL_API =
-    'https://64dd7598825d19d9bfb12c6d.mockapi.io/api/todo-list/';
+  private todoList = new BehaviorSubject<TodoModel[]>([
+    {
+      todo: 'todo 1',
+      date: new Date(),
+      completed: true,
+      id: '1',
+    },
+    {
+      todo: 'todo 2',
+      date: new Date(),
+      completed: false,
+      id: '9',
+    },
+    {
+      todo: 'todo 3',
+      date: new Date(),
+      completed: false,
+      id: '7',
+    },
+  ]);
 
-  constructor(private httpClient: HttpClient) {}
-
-  getAllTodos(): Observable<Array<TodoModel>> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.httpClient
-      .get<Array<TodoModel>>(this.URL_API, { headers })
-      .pipe(
-        tap((response: Array<TodoModel>) => {
-          // TODO: rever esse retorno
-          console.log('response', response);
-          if (response && response.length > 0) {
-          } else {
-          }
-        })
-      );
+  getTodoList(): Observable<TodoModel[]> {
+    return this.todoList.asObservable();
   }
 
-  getTodo(id: string): Observable<Array<TodoModel>> {
-    const params = new HttpParams().append('id', id);
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
-    return this.httpClient
-      .get<Array<TodoModel>>(this.URL_API, { params, headers })
-      .pipe(
-        tap((response: Array<TodoModel>) => {
-          console.log('response', response);
-          // TODO: rever esse retorno
-          if (response && response.length > 0) {
-          } else {
-          }
-        })
-      );
+  getTodoById(id: string): Observable<TodoModel | undefined> {
+    const todo = this.todoList.getValue().find((todo) => todo.id === id);
+    return of(todo);
   }
 
   addTodo(newTodo: TodoModel): Observable<TodoModel> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
-    return this.httpClient
-      .post<TodoModel>(this.URL_API, newTodo, { headers })
-      .pipe(
-        tap((response: TodoModel) => {
-          // TODO: rever esse retorno
-       
-        })
-      );
+    newTodo.id = this.gerarId();
+    const currentList = this.todoList.getValue();
+    this.todoList.next([...currentList, newTodo]);
+    return of(newTodo);
   }
 
-  updateTodo(newTodo: TodoModel): Observable<Array<TodoModel>> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
-    return this.httpClient
-      .put<Array<TodoModel>>(this.URL_API + newTodo.id, newTodo, { headers })
-      .pipe(
-        tap((response: Array<TodoModel>) => {
-          // TODO: rever esse retorno
-          if (response && response.length > 0) {
-          } else {
-          }
-        })
-      );
+  updateTodo(id: string, updatedTodo: TodoModel): Observable<TodoModel> {
+    const currentList = this.todoList.getValue();
+    const updatedList = currentList.map((todo) =>
+      todo.id === id ? { ...todo, ...updatedTodo } : todo
+    );
+    this.todoList.next(updatedList);
+    return of(updatedTodo);
   }
 
-  removeTodo(id: string): Observable<Array<TodoModel>> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  deleteTodo(id: string): Observable<boolean> {
+    const currentList = this.todoList.getValue();
+    const updatedList = currentList.filter((todo) => todo.id !== id);
+    this.todoList.next(updatedList);
+    return of(true);
+  }
 
-    return this.httpClient
-      .delete<Array<TodoModel>>(this.URL_API + id, {
-        headers,
-      })
-      .pipe(
-        tap((response: Array<TodoModel>) => {
-          // TODO: rever esse retorno
-          if (response && response.length > 0) {
-          } else {
-          }
-        })
-      );
+  private gerarId(): string {
+    const newId = Math.max(
+      ...this.todoList.getValue().map((obj) => Number(obj.id) + 1)
+    );
+    return String(newId);
   }
 }
