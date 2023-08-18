@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomePage, canActivate: [AuthGuard] },
   { path: 'signin', component: SigninPage, canActivate: [UnauthGuard] },
-  { path: 'signup', component: SignupPage },
+  { path: 'signup', component: SignupPage, canActivate: [UnauthGuard] },
   { path: 'todo-list', component: TodoListPage, canActivate: [AuthGuard] },
   { path: 'add-todo', component: TodoPage, canActivate: [AuthGuard] },
   { path: 'edit-todo', component: TodoPage, canActivate: [AuthGuard] },
