@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 import { UserModel } from '../models/user.model';
 import { SessionStorageEnum } from '../enums/session-storage';
 import { UserService } from './user.service';
@@ -7,7 +7,7 @@ import { UserService } from './user.service';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private userList = new Array<UserModel>();
-  private loggedInSubject = new BehaviorSubject<boolean>(false);
+  private loggedInSubject = new Subject<boolean>();
   loggedIn$ = this.loggedInSubject.asObservable();
 
   constructor(private userService: UserService) {
