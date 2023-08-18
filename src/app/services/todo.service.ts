@@ -44,18 +44,26 @@ export class TodoService {
       );
   }
 
+  addTodo(newTodo: TodoModel): Observable<TodoModel> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.httpClient
+      .post<TodoModel>(this.URL_API, newTodo, { headers })
+      .pipe(
+        tap((response: TodoModel) => {
+          // TODO: rever esse retorno
+       
+        })
+      );
+  }
+
   updateTodo(newTodo: TodoModel): Observable<Array<TodoModel>> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.httpClient
-      .put<Array<TodoModel>>(
-        this.URL_API + `/todo-list/${newTodo.id}`,
-        newTodo,
-        { headers }
-      )
+      .put<Array<TodoModel>>(this.URL_API + newTodo.id, newTodo, { headers })
       .pipe(
         tap((response: Array<TodoModel>) => {
-          console.log('response update', response);
           // TODO: rever esse retorno
           if (response && response.length > 0) {
           } else {
@@ -73,7 +81,6 @@ export class TodoService {
       })
       .pipe(
         tap((response: Array<TodoModel>) => {
-          console.log('response update', response);
           // TODO: rever esse retorno
           if (response && response.length > 0) {
           } else {
