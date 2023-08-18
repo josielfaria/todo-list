@@ -27,18 +27,15 @@ export class SigninPage {
   login(): void {
     let username = this.loginForm?.controls['username'].value || '';
     let password = this.loginForm?.controls['password'].value || '';
-    console.log('username', username);
-    console.log('password', password);
 
     try {
-      this.authService.login(username, password).subscribe((loggedIn: any) => {
-        if (loggedIn) {
-          // TODO: adicionar notification successful
-          this.router.navigateByUrl('home');
-        } else {
-          // TODO: adicionar notification unsuccessful
-        }
-      });
+      this.authService
+        .login(username, password)
+        .subscribe((loggedIn: boolean) => {
+          if (loggedIn) {
+            this.router.navigateByUrl('home');
+          }
+        });
     } catch (error) {
       // TODO: adicionar notification unsuccessful
       console.log('Login failed', error);

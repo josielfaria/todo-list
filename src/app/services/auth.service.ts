@@ -1,36 +1,33 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { UserModel } from '../models/user.model';
 import { SessionStorageEnum } from '../enums/session-storage';
+import { UserService } from './user.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly URL_API = 'https://64dd7598825d19d9bfb12c6d.mockapi.io/api';
-
+  private userList = new Array<UserModel>();
   private loggedInSubject = new BehaviorSubject<boolean>(false);
   loggedIn$ = this.loggedInSubject.asObservable();
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private userService: UserService) {
+    this.userService
+      .getUserList()
+      .subscribe((userListApi) => (this.userList = userListApi));
+  }
 
-  login(username: string, password: string): Observable<any> {
-    const params = new HttpParams()
-      .append('username', username)
-      .append('password', password);
+  login(username: string, password: string): Observable<boolean> {
+    const user = this.userList.find(
+      (user) => user.username === username && user.password === password
+    );
 
-    return this.httpClient
-      .get<Array<UserModel>>(this.URL_API + '/users', { params })
-      .pipe(
-        tap((response: Array<UserModel>) => {
-          if (response && response.length > 0) {
-            this.loggedInSubject.next(true);
-            this.setLoggedInSession(true);
-          } else {
-            this.logout();
-          }
-        })
-      );
+    if (!!user) {
+      this.loggedInSubject.next(true);
+      this.setLoggedInSession(true);
+    } else {
+      this.logout();
+    }
+    return of(!!user);
   }
 
   logout(): void {
@@ -39,7 +36,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    // Se converter para Boolean terá o retorno sempre true para quando houver LoggedIn na Session Storage. 
+    // Se converter para Boolean terá o retorno sempre true para quando houver LoggedIn na Session Storage.
     return sessionStorage.getItem(SessionStorageEnum.LoggedIn) === 'true';
   }
 
