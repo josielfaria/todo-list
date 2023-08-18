@@ -1,16 +1,24 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav mode="side" opened="true" *ngIf="isLoggedIn">
     <mat-nav-list>
-      <a mat-list-item routerLink="/home">Início</a>
-      <a mat-list-item routerLink="/todo-list">Tarefas</a>
+      <mat-list-item>
+        <mat-icon matListItemIcon>home</mat-icon>
+        <div matListItemTitle routerLink="/home">Início</div>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon matListItemIcon>format_list_bulleted</mat-icon>
+        <div matListItemTitle routerLink="/todo-list">Tarefas</div>
+      </mat-list-item>
     </mat-nav-list>
+
     <button
       class="w-50 position-absolute bottom-0 start-0 end-0 m-auto mb-5"
       mat-button
       color="warn"
       (click)="logout()"
     >
-      Sair
+      <span>Sair</span>
+      <mat-icon iconPositionEnd>exit_to_app</mat-icon>
     </button>
   </mat-sidenav>
   <mat-sidenav-content class="w-100">
