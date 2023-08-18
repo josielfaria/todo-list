@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { TodoModel } from 'src/app/models/todo.model';
 import { ActionTodoPageEnum } from 'src/app/enums/action-todo-page';
 import { TodoService } from 'src/app/services/todo.service';
+import { RoutesEnum } from 'src/app/enums/routes';
 
 @Component({
   selector: 'app-todo-list',
@@ -26,12 +27,12 @@ export class TodoListPage implements OnInit {
   navigateTo(action: ActionTodoPageEnum, idTodo: string): void {
     let url =
       action === ActionTodoPageEnum.EditTodoPage
-        ? '/edit-todo'
-        : '/remove-todo';
+        ? RoutesEnum.EditTodo
+        : RoutesEnum.RemoveTodo;
     this.router.navigate([url], { queryParams: { idTodo, action } });
   }
 
   addTodo(action: ActionTodoPageEnum): void {
-    this.router.navigate(['/add-todo'], { queryParams: { action } });
+    this.router.navigate([RoutesEnum.AddTodo], { queryParams: { action } });
   }
 }

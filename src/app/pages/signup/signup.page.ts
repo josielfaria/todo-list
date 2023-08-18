@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, catchError, map, of } from 'rxjs';
+import { RoutesEnum } from 'src/app/enums/routes';
 import { UserModel } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -39,7 +40,7 @@ export class SignupPage implements OnInit {
         this.authService.register(newUser).subscribe((userRegistered) => {
           console.log('userRegistered', userRegistered);
           if (userRegistered) {
-            this.router.navigateByUrl('/signin');
+            this.router.navigateByUrl(RoutesEnum.Signin);
           } else {
             this.registrationForm
               ?.get('username')
@@ -51,7 +52,7 @@ export class SignupPage implements OnInit {
   }
 
   navigateToSignin(): void {
-    this.router.navigateByUrl('signin');
+    this.router.navigateByUrl(RoutesEnum.Signin);
   }
 
   private setRegistrationFormGroupConfig(): void {
