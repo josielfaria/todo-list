@@ -20,7 +20,7 @@ export class UnauthGuard {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    this.authService.logout();
+    this.authService.logout(true);
     return true;
   }
 }

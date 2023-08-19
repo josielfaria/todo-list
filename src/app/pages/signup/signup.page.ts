@@ -38,7 +38,6 @@ export class SignupPage implements OnInit {
       const newUser = this.registrationForm.getRawValue() as UserModel;
       if (newUser) {
         this.authService.register(newUser).subscribe((userRegistered) => {
-          console.log('userRegistered', userRegistered);
           if (userRegistered) {
             this.router.navigateByUrl(RoutesEnum.Signin);
           } else {

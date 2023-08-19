@@ -46,8 +46,11 @@ export class AuthService {
     return of(true).pipe(delay(this.LAG_TIME));
   }
 
-  logout(): void {
-    this.loadingService.show();
+  logout(unauth = false): void {
+    if (!unauth) {
+      this.loadingService.show();
+    }
+    
     this.loggedInSubject.next(false);
   }
 

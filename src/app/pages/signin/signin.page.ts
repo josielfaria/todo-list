@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RoutesEnum } from 'src/app/enums/routes';
-import { AuthGuard } from 'src/app/guards/auth.guard';
-import { UnauthGuard } from 'src/app/guards/unauth.guard';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -20,8 +18,6 @@ export class SigninPage {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private authGuard: AuthGuard,
-    private unauthGuard: UnauthGuard,
     private router: Router
   ) {}
 
@@ -29,18 +25,13 @@ export class SigninPage {
     let username = this.loginForm?.controls['username'].value || '';
     let password = this.loginForm?.controls['password'].value || '';
 
-    try {
-      this.authService
-        .login(username, password)
-        .subscribe((loggedIn: boolean) => {
-          if (loggedIn) {
-            this.router.navigateByUrl(RoutesEnum.Home);
-          }
-        });
-    } catch (error) {
-      // TODO: adicionar notification unsuccessful
-      console.log('Login failed', error);
-    }
+    this.authService
+      .login(username, password)
+      .subscribe((loggedIn: boolean) => {
+        if (loggedIn) {
+          this.router.navigateByUrl(RoutesEnum.Home);
+        }
+      });
   }
 
   navigateToSignup(): void {
