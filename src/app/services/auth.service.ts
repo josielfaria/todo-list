@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, delay, of } from 'rxjs';
+import { Observable, Subject, delay, of, tap } from 'rxjs';
 import { UserModel } from '../models/user.model';
 import { SessionStorageEnum } from '../enums/session-storage';
 import { UserService } from './user.service';
+import { LoadingService } from './loading.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -11,15 +12,24 @@ export class AuthService {
   private userList = new Array<UserModel>();
 
   private loggedInSubject = new Subject<boolean>();
-  loggedIn$ = this.loggedInSubject.asObservable().pipe(delay(this.LAG_TIME));
 
-  constructor(private userService: UserService) {
+  loggedIn$ = this.loggedInSubject.asObservable().pipe(
+    delay(this.LAG_TIME),
+    tap(() => this.loadingService.hide())
+  );
+
+  constructor(
+    private userService: UserService,
+    private loadingService: LoadingService
+  ) {
     this.userService
       .getUserList()
       .subscribe((userListApi) => (this.userList = userListApi));
   }
 
   login(username: string, password: string): Observable<boolean> {
+    this.loadingService.show();
+
     const user = this.userList.find(
       (user) => user.username === username && user.password === password
     );
@@ -30,12 +40,14 @@ export class AuthService {
   }
 
   register(newUser: UserModel): Observable<boolean> {
+    this.loadingService.show();
     newUser.id = this.gerarId();
     this.userService.addUser(newUser);
     return of(true).pipe(delay(this.LAG_TIME));
   }
 
   logout(): void {
+    this.loadingService.show();
     this.loggedInSubject.next(false);
   }
 
