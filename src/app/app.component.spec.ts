@@ -59,6 +59,14 @@ describe(AppComponent.name, () => {
     expect(authServiceStub.logout).toHaveBeenCalled();
   });
 
+  it('deve cancelar a inscrição no loadingService em ngOnDestroy', () => {
+    const unsubscribeSpy = spyOn(component['subscriptions'], 'unsubscribe');
+    authServiceStub.loggedIn$ = of(true);
+    fixture.detectChanges();
+    component.ngOnDestroy();
+    expect(unsubscribeSpy).toHaveBeenCalled();
+  });
+
   afterEach(() => {
     fixture.destroy();
   });
