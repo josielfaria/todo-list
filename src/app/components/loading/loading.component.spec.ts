@@ -1,10 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LoadingComponent } from './loading.component';
 import { LoadingService } from 'src/app/services/loading.service';
-import { of } from 'rxjs';
 import { AppModule } from 'src/app/app.module';
 
-fdescribe('LoadingComponent', () => {
+describe(LoadingComponent.name, () => {
   let component: LoadingComponent;
   let fixture: ComponentFixture<LoadingComponent>;
   let mockLoadingService: LoadingService;
