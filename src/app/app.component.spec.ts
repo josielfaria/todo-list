@@ -8,6 +8,7 @@ import { RoutesEnum } from './enums/routes';
 import { AppModule } from './app.module';
 
 describe(AppComponent.name, () => {
+  let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let authServiceStub: Partial<AuthService>;
   let router: Router;
@@ -25,6 +26,8 @@ describe(AppComponent.name, () => {
       providers: [{ provide: AuthService, useValue: authServiceStub }],
     }).compileComponents();
 
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
     router = TestBed.inject(Router);
   });
 
@@ -33,30 +36,26 @@ describe(AppComponent.name, () => {
     fixture.detectChanges();
   });
 
-  it('deve criar o aplicativo', () => {
-    const componente = fixture.componentInstance;
-    expect(componente).toBeTruthy();
+  it('deve criar o component', () => {
+    expect(component).toBeTruthy();
   });
 
   it('deve navegar para a página inicial quando o usuário estiver logado', () => {
     authServiceStub.loggedIn$ = of(true);
     spyOn(router, 'navigateByUrl');
-    const componente = fixture.componentInstance;
-    componente.ngOnInit();
+    component.ngOnInit();
     expect(router.navigateByUrl).toHaveBeenCalledWith(RoutesEnum.Home);
   });
 
   it('deve navegar para a página de login quando o usuário não estiver logado', () => {
     authServiceStub.loggedIn$ = of(false);
     spyOn(router, 'navigateByUrl');
-    const componente = fixture.componentInstance;
-    componente.ngOnInit();
+    component.ngOnInit();
     expect(router.navigateByUrl).toHaveBeenCalledWith(RoutesEnum.Signin);
   });
 
   it('deve chamar authService.logout ao fazer logout', () => {
-    const componente = fixture.componentInstance;
-    componente.logout();
+    component.logout();
     expect(authServiceStub.logout).toHaveBeenCalled();
   });
 
