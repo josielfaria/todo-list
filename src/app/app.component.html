@@ -2,13 +2,13 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav mode="side" opened="true" *ngIf="isLoggedIn">
     <mat-nav-list>
-      <mat-list-item>
+      <mat-list-item routerLink="/home">
         <mat-icon matListItemIcon>home</mat-icon>
-        <div matListItemTitle routerLink="/home">Início</div>
+        <div matListItemTitle>Início</div>
       </mat-list-item>
-      <mat-list-item>
+      <mat-list-item routerLink="/todo-list">
         <mat-icon matListItemIcon>format_list_bulleted</mat-icon>
-        <div matListItemTitle routerLink="/todo-list">Tarefas</div>
+        <div matListItemTitle>Tarefas</div>
       </mat-list-item>
     </mat-nav-list>
 
