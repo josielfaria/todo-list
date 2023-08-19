@@ -3,6 +3,7 @@ import { AuthService } from './services/auth.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { RoutesEnum } from './enums/routes';
+import { SessionStorageEnum } from './enums/session-storage';
 
 @Component({
   selector: 'app-root',
@@ -20,8 +21,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.authService.loggedIn$.subscribe((isLoggedIn) => {
         this.isLoggedIn = isLoggedIn;
-        if (!isLoggedIn && this.authService.isLoggedIn()) {
+        this.setLoggedInSession(isLoggedIn);
+        if (!this.isLoggedIn) {
           this.router.navigateByUrl(RoutesEnum.Signin);
+        }else{
+          this.router.navigateByUrl(RoutesEnum.Home);
         }
       })
     );
@@ -33,5 +37,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   logout(): void {
     this.authService.logout();
+  }
+
+  private setLoggedInSession(value: boolean): void {
+    sessionStorage.setItem(SessionStorageEnum.LoggedIn, String(value));
   }
 }
