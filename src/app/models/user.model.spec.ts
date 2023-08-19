@@ -1,6 +1,6 @@
 import { UserModel } from './user.model';
 
-describe('UserModel', () => {
+describe(UserModel.name, () => {
   it('deve criar uma instância de UserModel', () => {
     const user = new UserModel('Name Test', 'usertest123', 'senha123');
 
