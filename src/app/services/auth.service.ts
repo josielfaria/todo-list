@@ -7,7 +7,7 @@ import { LoadingService } from './loading.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly LAG_TIME = 1000; // FIXME: esse time é para o loading
+  private readonly LAG_TIME = 400; // FIXME: esse time é para o loading
 
   private userList = new Array<UserModel>();
 
