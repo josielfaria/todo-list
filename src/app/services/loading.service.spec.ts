@@ -1,8 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-
 import { LoadingService } from './loading.service';
 
-describe('LoadingService', () => {
+describe(LoadingService.name, () => {
   let service: LoadingService;
 
   beforeEach(() => {
@@ -10,7 +9,29 @@ describe('LoadingService', () => {
     service = TestBed.inject(LoadingService);
   });
 
-  it('should be created', () => {
+  it('deve ser criado', () => {
     expect(service).toBeTruthy();
+  });
+
+  it('deve inicializar loading$ com valor inicial false', () => {
+    service.loading$.subscribe((loading) => {
+      expect(loading).toBe(false);
+    });
+  });
+
+  it('deve mostrar o carregamento', () => {
+    service.show();
+
+    service.loading$.subscribe((loading) => {
+      expect(loading).toBe(true);
+    });
+  });
+
+  it('deve esconder o carregamento', () => {
+    service.hide();
+
+    service.loading$.subscribe((loading) => {
+      expect(loading).toBe(false);
+    });
   });
 });
