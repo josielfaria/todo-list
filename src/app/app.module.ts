@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BooleanToStringPipe } from './pipes/boolean-to-string.pipe';
 import { TodoPage } from './pages/todo/todo.page';
 import { ActionPageTextPipe } from './pipes/action-page-text.pipe';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ActionPageTextPipe } from './pipes/action-page-text.pipe';
     TodoPage,
     BooleanToStringPipe,
     ActionPageTextPipe,
+    LoadingComponent,
   ],
   imports: [
     HttpClientModule,
