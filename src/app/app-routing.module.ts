@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: '', redirectTo: RoutesEnum.Home, pathMatch: 'full' },
   { path: RoutesEnum.Home, component: HomePage, canActivate: [AuthGuard] },
   { path: RoutesEnum.Signin, component: SigninPage, canActivate: [UnauthGuard] },
-  { path: RoutesEnum.Signup, component: SignupPage, canActivate: [UnauthGuard] },
+  { path: RoutesEnum.Signup, component: SignupPage, canActivate: [] },
   { path: RoutesEnum.TodoList, component: TodoListPage, canActivate: [AuthGuard] },
   { path: RoutesEnum.AddTodo, component: TodoPage, canActivate: [AuthGuard] },
   { path: RoutesEnum.EditTodo, component: TodoPage, canActivate: [AuthGuard] },
