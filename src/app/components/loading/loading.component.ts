@@ -8,16 +8,19 @@ import { LoadingService } from 'src/app/services/loading.service';
   styleUrls: ['./loading.component.scss'],
 })
 export class LoadingComponent implements OnDestroy {
+  private subscriptions = new Subscription();
+  
   isLoading: boolean = false;
-  private subscription: Subscription;
 
   constructor(private loadingService: LoadingService) {
-    this.subscription = this.loadingService.loading$.subscribe((isLoading) => {
-      this.isLoading = isLoading;
-    });
+    this.subscriptions.add(
+      this.loadingService.loading$.subscribe((isLoading) => {
+        this.isLoading = isLoading;
+      })
+    );
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 }
