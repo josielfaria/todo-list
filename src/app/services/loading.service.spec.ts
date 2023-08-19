@@ -19,7 +19,7 @@ describe(LoadingService.name, () => {
     });
   });
 
-  it('deve mostrar o carregamento', () => {
+  it('deve mostrar o loading', () => {
     service.show();
 
     service.loading$.subscribe((loading) => {
@@ -27,7 +27,7 @@ describe(LoadingService.name, () => {
     });
   });
 
-  it('deve esconder o carregamento', () => {
+  it('deve esconder o loading', () => {
     service.hide();
 
     service.loading$.subscribe((loading) => {
