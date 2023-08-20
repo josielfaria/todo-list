@@ -65,3 +65,4 @@ Desenvolvimento de um aplicativo de gerenciamento de tarefas utilizando Angular.
 
 - Utilização de uma api remota
 - Controle de tarefas por usuários
+- Ajuste de reponsividade para mobile
