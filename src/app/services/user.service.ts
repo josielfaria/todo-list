@@ -12,19 +12,19 @@ export class UserService {
   private userList = new BehaviorSubject<UserModel[]>([
     {
       id: '1',
-      name: 'josiel',
-      username: 'josiel',
+      name: 'Nome Test 1',
+      username: 'user1',
       password: '1234',
     },
     {
       id: '9',
-      name: 'josiel',
+      name: 'Nome Test 2',
       username: 'user2',
       password: '1234',
     },
     {
       id: '7',
-      name: 'josiel',
+      name: 'Nome Test 3',
       username: 'user3',
       password: '1234',
     },
