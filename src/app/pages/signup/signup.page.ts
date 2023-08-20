@@ -18,7 +18,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./signup.page.scss'],
 })
 export class SignupPage implements OnInit {
-  registrationForm: FormGroup | undefined;
+  registrationForm?: FormGroup;
 
   usernameExists = false;
 
@@ -32,7 +32,7 @@ export class SignupPage implements OnInit {
     this.setRegistrationFormGroupConfig();
   }
 
-  registration() {
+  registration(): void {
     this.registrationForm?.markAllAsTouched();
     if (this.registrationForm?.valid) {
       const newUser = this.registrationForm.getRawValue() as UserModel;
@@ -65,7 +65,7 @@ export class SignupPage implements OnInit {
       password: ['', [Validators.required, Validators.minLength(4)]],
       confirmPassword: [
         '',
-        [Validators.required],
+        [Validators.required, Validators.minLength(4)],
         [this.checkPasswordsValidator()],
       ],
     });
