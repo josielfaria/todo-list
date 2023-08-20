@@ -3,7 +3,7 @@ import { UserService } from './user.service';
 import { LoadingService } from './loading.service';
 import { UserModel } from '../models/user.model';
 
-fdescribe(UserService.name, () => {
+describe(UserService.name, () => {
   let userService: UserService;
   let loadingServiceStub: Partial<LoadingService>;
   let userMock: UserModel;
