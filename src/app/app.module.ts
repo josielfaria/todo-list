@@ -8,7 +8,6 @@ import { AngularMaterialModule } from './angular-material/angular-material.modul
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomePage } from './pages/home/home.page';
-import { LoginPage } from './pages/login/login.page';
 import { SigninPage } from './pages/signin/signin.page';
 import { SignupPage } from './pages/signup/signup.page';
 import { TodoListPage } from './pages/todo-list/todo-list.page';
@@ -22,7 +21,6 @@ import { LoadingComponent } from './components/loading/loading.component';
   declarations: [
     AppComponent,
     HomePage,
-    LoginPage,
     SigninPage,
     SignupPage,
     TodoListPage,
