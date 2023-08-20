@@ -6,15 +6,15 @@ import { AppModule } from 'src/app/app.module';
 describe(LoadingComponent.name, () => {
   let component: LoadingComponent;
   let fixture: ComponentFixture<LoadingComponent>;
-  let mockLoadingService: LoadingService;
+  let loadingServiceStub: LoadingService;
 
   beforeEach(() => {
-    mockLoadingService = new LoadingService();
+    loadingServiceStub = new LoadingService();
 
     TestBed.configureTestingModule({
       declarations: [LoadingComponent],
       imports: [AppModule],
-      providers: [{ provide: LoadingService, useValue: mockLoadingService }],
+      providers: [{ provide: LoadingService, useValue: loadingServiceStub }],
     });
 
     fixture = TestBed.createComponent(LoadingComponent);
@@ -27,20 +27,20 @@ describe(LoadingComponent.name, () => {
   });
 
   it('deve definir isLoading como true quando o loadingService emite true', () => {
-    mockLoadingService.show();
+    loadingServiceStub.show();
     fixture.detectChanges();
     expect(component.isLoading).toBeTrue();
   });
 
   it('deve definir isLoading como false quando o loadingService emite false', () => {
-    mockLoadingService.hide();
+    loadingServiceStub.hide();
     fixture.detectChanges();
     expect(component.isLoading).toBeFalse();
   });
 
   it('deve cancelar a inscrição no loadingService em ngOnDestroy', () => {
     const unsubscribeSpy = spyOn(component['subscription'], 'unsubscribe');
-    mockLoadingService.show();
+    loadingServiceStub.show();
     fixture.detectChanges();
     component.ngOnDestroy();
     expect(unsubscribeSpy).toHaveBeenCalled();
