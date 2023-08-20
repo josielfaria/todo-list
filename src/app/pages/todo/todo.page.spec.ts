@@ -11,9 +11,8 @@ import { ActionPageTextPipe } from 'src/app/pipes/action-page-text.pipe';
 import { AppModule } from 'src/app/app.module';
 import { of } from 'rxjs';
 import { RoutesEnum } from 'src/app/enums/routes';
-import { TodoService } from 'src/app/services/todo.service';
 
-describe('TodoPage', () => {
+describe(TodoPage.name, () => {
   let component: TodoPage;
   let fixture: ComponentFixture<TodoPage>;
   let activatedRouteStub: Partial<ActivatedRoute>;
