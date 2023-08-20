@@ -1,29 +1,73 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
 import { AppComponent } from './app.component';
+import { AuthService } from './services/auth.service';
+import { of } from 'rxjs';
+import { RoutesEnum } from './enums/routes';
+import { AppModule } from './app.module';
 
-describe('AppComponent', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [RouterTestingModule],
-    declarations: [AppComponent]
-  }));
+describe(AppComponent.name, () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let authServiceStub: Partial<AuthService>;
+  let router: Router;
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  authServiceStub = {
+    loggedIn$: of(true),
+    isLoggedIn: () => true,
+    logout: jasmine.createSpy('logout'),
+  };
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [RouterTestingModule, AppModule],
+      declarations: [AppComponent],
+      providers: [{ provide: AuthService, useValue: authServiceStub }],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    router = TestBed.inject(Router);
   });
 
-  it(`should have as title 'todo-list'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('todo-list');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('todo-list app is running!');
+  });
+
+  it('deve criar o component', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('deve navegar para a página inicial quando o usuário estiver logado', () => {
+    authServiceStub.loggedIn$ = of(true);
+    spyOn(router, 'navigateByUrl');
+    component.ngOnInit();
+    expect(router.navigateByUrl).toHaveBeenCalledWith(RoutesEnum.Home);
+  });
+
+  it('deve navegar para a página de login quando o usuário não estiver logado', () => {
+    authServiceStub.loggedIn$ = of(false);
+    spyOn(router, 'navigateByUrl');
+    component.ngOnInit();
+    expect(router.navigateByUrl).toHaveBeenCalledWith(RoutesEnum.Signin);
+  });
+
+  it('deve chamar authService.logout ao fazer logout', () => {
+    component.logout();
+    expect(authServiceStub.logout).toHaveBeenCalled();
+  });
+
+  it('deve cancelar a inscrição no loadingService em ngOnDestroy', () => {
+    const unsubscribeSpy = spyOn(component['subscriptions'], 'unsubscribe');
+    authServiceStub.loggedIn$ = of(true);
+    fixture.detectChanges();
+    component.ngOnDestroy();
+    expect(unsubscribeSpy).toHaveBeenCalled();
+  });
+
+  afterEach(() => {
+    fixture.destroy();
   });
 });

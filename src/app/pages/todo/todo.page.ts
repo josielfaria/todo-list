@@ -26,7 +26,8 @@ export class TodoPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.actionPage = this.activatedRoute.snapshot.queryParams['action'];
+    let actionParam = this.activatedRoute.snapshot.queryParams['action'] as ActionTodoPageEnum;
+    this.actionPage = actionParam ? actionParam : this.actionPage;
     this.setTodoFormGroupConfig();
 
     if (this.actionPage !== ActionTodoPageEnum.NewTodoPage) {
