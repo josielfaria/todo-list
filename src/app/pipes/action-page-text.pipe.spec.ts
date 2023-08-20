@@ -13,6 +13,11 @@ describe(ActionPageTextPipe.name, () => {
     pipe = TestBed.inject(ActionPageTextPipe);
   });
 
+  it('deve criar uma instancia', () => {
+    const pipe = new ActionPageTextPipe();
+    expect(pipe).toBeTruthy();
+  });
+
   it('deve transformar o valor de NewTodoPage', () => {
     const valorTransformado = pipe.transform(ActionTodoPageEnum.NewTodoPage);
     expect(valorTransformado).toBe('Adicionar');
