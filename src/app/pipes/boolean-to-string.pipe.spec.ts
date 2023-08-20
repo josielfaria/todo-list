@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { BooleanToStringPipe } from './boolean-to-string.pipe';
 
-fdescribe(BooleanToStringPipe.name, () => {
+describe(BooleanToStringPipe.name, () => {
   let pipe: BooleanToStringPipe;
 
   beforeEach(() => {
