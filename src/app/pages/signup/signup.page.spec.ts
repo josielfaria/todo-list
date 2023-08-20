@@ -18,7 +18,7 @@ import { RoutesEnum } from 'src/app/enums/routes';
 import { AppModule } from 'src/app/app.module';
 import { UserModel } from 'src/app/models/user.model';
 
-fdescribe(SignupPage.name, () => {
+describe(SignupPage.name, () => {
   let component: SignupPage;
   let fixture: ComponentFixture<SignupPage>;
   let authService: AuthService;
