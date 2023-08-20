@@ -16,6 +16,7 @@ import { BooleanToStringPipe } from './pipes/boolean-to-string.pipe';
 import { TodoPage } from './pages/todo/todo.page';
 import { ActionPageTextPipe } from './pipes/action-page-text.pipe';
 import { LoadingComponent } from './components/loading/loading.component';
+import { APP_BASE_HREF } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     ReactiveFormsModule,
     NgbModule,
   ],
-  providers: [],
+  providers: [{provide: APP_BASE_HREF, useValue: '/todo-list/'}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
