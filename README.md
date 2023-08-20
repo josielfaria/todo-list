@@ -1,8 +1,8 @@
 # TODO LIST
 
-### Acesse o projeto aqui: 
+### Visualize o projeto aqui: 
 
-https://www.com
+https://josielfaria.github.io/todo-list
 
 ### Sobre o projeto
 
