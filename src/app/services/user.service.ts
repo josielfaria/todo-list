@@ -7,7 +7,7 @@ import { LoadingService } from './loading.service';
   providedIn: 'root',
 })
 export class UserService {
-  private readonly LAG_TIME = 500; // FIXME: esse time é para o loading
+  private readonly LAG_TIME = 400; // FIXME: esse time é para o loading
 
   private userList = new BehaviorSubject<UserModel[]>([
     {
